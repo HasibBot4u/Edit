@@ -2,8 +2,8 @@
 
 **Project ID:** AIVX  
 **Date:** 2026-11-27 (Asia/Dhaka, UTC+6)  
-**Current phase:** B — Requirements Analysis and Documentation Integrity (`IN PROGRESS / NOT EXITED`: `AIVX-A0-INSPECT-001` completed; `AIVX-B0-ANALYSIS-RECONCILE-001` archived with errata; `AIVX-B1-DOC-CORRECTIONS-001` applied; Tier 1–3 user decisions and under-specified feature FRs/tests remain `OPEN`)  
-**Overall status:** Authoritative specifications, ID ranges, canonical entity mappings, cross-document test register (`docs/TEST_REGISTER.md`), traceability matrix (`docs/TRACEABILITY.md`), decision register (`docs/DECISION_LOG.md`), and repository unique audit ledger (`docs/REPOSITORY_UNIQUE_AUDIT.csv`) are reconciled under `docs/`; Phase B is **NOT EXITED** pending explicit user approval of open decisions; AIVX app feature implementation is `NOT STARTED` (`0` app source/Gradle/manifest/resource/metadata changes).
+**Current phase:** B — Requirements Analysis and Documentation Integrity (`IN PROGRESS / NOT EXITED`: `AIVX-A0-INSPECT-001` completed; `AIVX-B0-ANALYSIS-RECONCILE-001` archived with errata; `AIVX-B1-DOC-CORRECTIONS-001` and `AIVX-B1.1-TRACEABILITY-REPAIR-001` completed; requirements audit is `PASS`, while under-specified feature FRs and Tier 1–3 user decisions remain `OPEN`)  
+**Overall status:** Requirements audit and traceability repair are complete under `docs/` (`docs/TRACEABILITY.md` v1.2, `docs/TEST_REGISTER.md` v1.1, `docs/DECISION_LOG.md` v1.1, `docs/REPOSITORY_UNIQUE_AUDIT.csv`). Phase B is **NOT EXITED** and Phase C UX/UI Design is **`BLOCKED / NOT READY`** pending explicit user approval of **Tier 1 (`DEC-UX-01..05`)** and P0/P1 scope FR check (Tier 2 and Tier 3 decisions are later-phase gates and do not block starting Phase C unless an exact UX dependency is demonstrated). AIVX app feature implementation is `NOT STARTED` (`0` app source/Gradle/manifest/resource/metadata changes).
 
 ---
 
@@ -27,6 +27,7 @@
 - [`PASS`] Executed `AIVX-A0-INSPECT-001` in Google AI Studio Build mode (`FACT`): verified native Android Kotlin + Jetpack Compose template workspace (`AGP 9.1.1`, `Gradle 9.3.1`, `Kotlin 2.4.21`, `KSP 2.3.5`, `Compose BOM 2024.09.00`, `compileSdk = 36` `minorApiLevel = 1`, `targetSdk = 36`, `minSdk = 24`, Java `11`, `namespace = "com.example"`, `applicationId = "com.example"`). Baseline A0 checks: standalone `compile_applet` = `PASS`; `gradle :app:testDebugUnitTest` = `1 PASS / 1 FAIL` (`ExampleUnitTest.addition_isCorrect` = `PASS`; `ExampleRobolectricTest` SDK 36 = `FAIL` due to `MavenArtifactFetcher` `HttpURLConnection` `IOException`); `lint_applet` = `NOT TESTED`; `androidTest`/emulator/`adb` = `BLOCKED`. Full verbatim `docs/reports/AIVX-A0-INSPECT-001.md` is `NOT AVAILABLE` (not reconstructed).
 - [`PASS`] Executed `AIVX-B0-ANALYSIS-RECONCILE-001` and archived verbatim at `docs/reports/AIVX-B0-ANALYSIS-RECONCILE-001.md` (`AIVX-B0-REPORT-ARCHIVE-001`).
 - [`PASS`] Executed `AIVX-B1-DOC-CORRECTIONS-001` (documentation-only): corrected all spec header ID ceilings (`41` defined FRs, `NFR-001..015`, `DATA-001..024`, `API-001..045`, `SEC-001..030`, `RISK-001..032`, `ADR-001..018`, `TEST-001..088`, `TEST-ARCH-001..007`), mapped `docs/CANONICAL_PROJECT_MODEL.md` entities to `DATA-001..024` with `OPEN` companion relationships, created `docs/TEST_REGISTER.md`, fixed `docs/TRACEABILITY.md`, created `docs/reports/AIVX-B0-REPORT-ERRATA-001.md`, expanded `docs/DECISION_LOG.md` with Tier 1–4 Open User Decision Register, reconciled `docs/README.md` / `docs/PROJECT_MANIFEST.md` / `docs/CHANGELOG.md`, and archived `docs/reports/AIVX-B1-DOC-CORRECTIONS-001.md`.
+- [`PASS`] Executed `AIVX-B1.1-TRACEABILITY-REPAIR-001` (documentation-only): repaired remaining requirement/screen/data/API/security/test ownership defects in `docs/TRACEABILITY.md` (v1.2) and `docs/TEST_REGISTER.md` (v1.1) — removed erroneous `FEAT-15` FR/SCR/DATA/API ownership from `FEAT-06` and `FEAT-08`, removed numeric-adjacency `DATA-011..012` / `API-012..017` defects across `FEAT-01`, `FEAT-03`, `FEAT-12`, `FEAT-13`, and `FEAT-14`, separated primary (`FEAT-13`) vs secondary (`FEAT-14`) ownership of `FR-045..046` and `TEST-087..088` without renumbering, added dedicated §2 Cross-Cutting `NFR-001..015` Traceability instead of lumping all NFRs into `PLATFORM-CORE`, clarified phase-specific Tier 1/2/3/4 approval gates, and archived `docs/reports/AIVX-B1.1-TRACEABILITY-REPAIR-001.md`.
 
 ---
 
@@ -37,7 +38,7 @@
 - [`NOT VERIFIED`] External non-catalogue references (`openreelio/openreelio`, `filmcraft-desktop/filmcraft`) are not counted in 412/264 and have not been source-audited.
 - [`FACT`] Only the initial untouched Android template exists in this workspace; zero AIVX app feature code, release APK/AAB, cloud API, storage bucket, Firebase/Cloud Run project, GPU worker, provider key, or paid service has been created.
 - [`NOT TESTED`] Zero acceptance tests in `docs/TEST_REGISTER.md` (`TEST-001..088`, `TEST-ARCH-001..007`) have been executed; no target-app export round-trip has been tested.
-- [`NOT TESTED`] No application build or unit/UI test was executed for documentation-only tasks `AIVX-B0-REPORT-ARCHIVE-001` or `AIVX-B1-DOC-CORRECTIONS-001`.
+- [`NOT TESTED`] No application build or unit/UI test was executed for documentation-only tasks `AIVX-B0-REPORT-ARCHIVE-001`, `AIVX-B1-DOC-CORRECTIONS-001`, or `AIVX-B1.1-TRACEABILITY-REPAIR-001`.
 
 ---
 
@@ -54,16 +55,23 @@
 
 ---
 
-## 5. Open Decisions & Phase B Blockers (`OPEN`)
+## 5. Phase-Specific Approval Gates & Readiness Separation (`OPEN`)
 
-All user decisions remain explicitly `OPEN` in `docs/DECISION_LOG.md` (none selected on the user's behalf):
+All user decisions remain explicitly `OPEN` in `docs/DECISION_LOG.md` (none selected on the user's behalf). Readiness is tracked across **five distinct states** so later-phase infrastructure decisions are not conflated with Phase C UX entry, and decision registration alone is never mistaken for Phase B completion:
 
-- [`OPEN` — Tier 1, blocks Phase C UX] `DEC-UX-01` (P0 vs P1/P2 staging), `DEC-UX-02` (`minSdk` / device matrix / portrait+landscape), `DEC-UX-03` (`ADR-016` friend roles & BYOK isolation), `DEC-UX-04` (`ADR-006` FEAT-15 confidence thresholds), `DEC-UX-05` (`ADR-018` offline/weak-network UX).
-- [`OPEN` — Tier 2, blocks Phase D Architecture] `ADR-004`/`ADR-005` (canonical schema & FilmCraft spike vs custom FFmpeg engine), `DEC-ARCH-01` (preview streaming transport), `DEC-ARCH-02` (`ADR-007` initial BYOK adapters), `DEC-ARCH-03` (authentication method).
-- [`OPEN` — Tier 3, blocks Cloud/Backend] `ADR-010` (billing/card & cost ceilings), `ADR-015` (cloud vendor, region, DB, storage, queue), `ADR-009` (GPU worker policy), `ADR-014` (media retention & external-provider consent), `ADR-008` (BYOK secret vault).
-- [`OPEN` — Account/Tooling] Account-level UI confirmation of streaming emulator preview, APK/AAB export, and physical-device install controls; resolution of container Robolectric SDK 36 HTTP fetch failure.
-- [`OPEN` — Requirements] Under-specified feature FRs and acceptance tests for `PLATFORM-CORE (TEST-001..019)`, `FEAT-04 (TEST-039)`, `FEAT-05 (TEST-040)`, `FEAT-06`, `FEAT-07` (mixing/DSP), `FEAT-08` (shaping/animation), `FEAT-09`, `FEAT-10`, and `FEAT-11`.
-- [`DEFERRED` — Tier 4] `ADR-012` (third-party editor export priority beyond MP4/OTIO), `ADR-017` (3D/Natron workers), `DEC-DEF-01` (tablet multi-pane), `DEC-DEF-02` (ComfyUI/Diffusion/TTS workers).
+### 5.1 Readiness State Breakdown (`FACT`)
+1. **Requirements Audit Completed:** `PASS` (`AIVX-B0`, `AIVX-B1`, and `AIVX-B1.1` reconciled IDs, headers, traceability, test ownership, cross-cutting NFRs, and 412/264 CSV integrity).
+2. **Requirements Fully Specified:** `PARTIAL / OPEN` (Baseline FRs exist for `PLATFORM-CORE`, `FEAT-01..03`, `FEAT-12`, `FEAT-13`, `FEAT-14`, `FEAT-15`; dedicated feature FRs and acceptance tests remain `OPEN` for `FEAT-04..11`, `PLATFORM-CORE` boundaries `TEST-001..019`, cross-cutting NFR benchmarks, and Security QA test IDs).
+3. **User Decisions Approved:** `OPEN` (`0` Tier 1–3 open decisions approved yet).
+4. **Later-Phase Decisions Deferred:** `DEFERRED` (Tier 4: `ADR-012`, `ADR-017`, `DEC-DEF-01`, `DEC-DEF-02`).
+5. **Phase C (UX/UI Design) Entry Readiness:** `BLOCKED / NOT READY` — blocked specifically on **Tier 1 (`DEC-UX-01..05`)** approval and confirming minimum UX/FR readiness for any under-specified feature selected into P0/P1 UX scope (`DEC-UX-01`). **Not** blocked on Tier 2 or Tier 3 unless an exact UX dependency is demonstrated.
+
+### 5.2 Phase-Specific Approval Sequence
+- [`OPEN` — **Tier 1: Mandatory BEFORE Phase C (UX/UI Design) begins**] `DEC-UX-01` (P0 vs P1/P2 staging), `DEC-UX-02` (`minSdk` / device matrix / portrait+landscape), `DEC-UX-03` (`ADR-016` friend roles & BYOK isolation), `DEC-UX-04` (`ADR-006` FEAT-15 confidence thresholds), `DEC-UX-05` (`ADR-018` offline/weak-network UX).
+- [`OPEN` — **Tier 2: Mandatory BEFORE Phase D (Technical Architecture) is finalized**] `ADR-004`/`ADR-005` (canonical schema & FilmCraft spike vs custom FFmpeg engine), `DEC-ARCH-01` (preview streaming transport), `DEC-ARCH-02` (`ADR-007` initial BYOK adapters), `DEC-ARCH-03` (authentication method). *(Does NOT block starting Phase C UX/UI design; only exact `SCR-01` auth-provider button details depend on `DEC-ARCH-03` when finalizing `SCR-01`.)*
+- [`OPEN` — **Tier 3: Mandatory BEFORE any Backend / Cloud / Storage / GPU Provisioning**] `ADR-010` (billing/card & cost ceilings), `ADR-015` (cloud vendor, region, DB, storage, queue), `ADR-009` (GPU worker policy), `ADR-014` (media retention & external-provider consent), `ADR-008` (BYOK secret vault). *(Does NOT block starting Phase C UX/UI design; `SCR-14` retention/cost controls can be designed as configurable UI slots before backend provisioning.)*
+- [`DEFERRED` — **Tier 4: Deferred to P1/P2+**] `ADR-012` (third-party editor export priority beyond MP4/OTIO), `ADR-017` (3D/Natron workers), `DEC-DEF-01` (tablet multi-pane), `DEC-DEF-02` (ComfyUI/Diffusion/TTS workers).
+- [`OPEN` — **Account / Tooling**] Account-level UI confirmation of streaming emulator preview, APK/AAB export, and physical-device install controls; resolution of container Robolectric SDK 36 HTTP fetch failure.
 
 ---
 
@@ -77,10 +85,14 @@ All user decisions remain explicitly `OPEN` in `docs/DECISION_LOG.md` (none sele
 | A0 workspace & toolchain check (`AIVX-A0-INSPECT-001`) | `PASS` *(Robolectric `FAIL`; emulator `BLOCKED`)* | Native Kotlin/Compose template verified; `compile_applet` = `PASS`; `ExampleUnitTest` = `PASS`; `ExampleRobolectricTest` (SDK 36) = `FAIL`; `lint_applet` = `NOT TESTED`; `androidTest`/`adb` = `BLOCKED`; full verbatim report `NOT AVAILABLE` |
 | B0 reconciliation audit & archive (`AIVX-B0-ANALYSIS-RECONCILE-001`) | `PASS (archived + errata)` | Archived verbatim at `docs/reports/AIVX-B0-ANALYSIS-RECONCILE-001.md`; errata at `docs/reports/AIVX-B0-REPORT-ERRATA-001.md` |
 | B1 documentation reconciliation (`AIVX-B1-DOC-CORRECTIONS-001`) | `PASS (docs-only; app build NOT TESTED)` | Reconciled headers, canonical model, `docs/TEST_REGISTER.md`, `docs/TRACEABILITY.md`, `docs/DECISION_LOG.md`, CSV & manifest; archived at `docs/reports/AIVX-B1-DOC-CORRECTIONS-001.md` |
-| Phase B exit gate | `OPEN / NOT EXITED` | Blocked on explicit user approval of Tier 1–3 decisions (`docs/DECISION_LOG.md`) and `OPEN` feature FRs/tests |
-| FilmCraft build/test spike | `NOT TESTED` | Pin commit; run isolated Linux cloud build/render spike |
-| Android AIVX implementation | `NOT STARTED` | Waiting for Phase B exit and Phase C approval |
-| Cloud backend & provider gateway | `NOT STARTED` | Requires architecture, auth, and billing/cost approval (`ADR-010`, `ADR-015`) |
+| B1.1 traceability, test ownership & phase-gate repair (`AIVX-B1.1-TRACEABILITY-REPAIR-001`) | `PASS (docs-only; app build NOT TESTED)` | Fixed `FEAT-06`/`FEAT-08` FR/SCR/DATA/API ownership, numeric-adjacency leaks, `FEAT-13`/`FEAT-14` `TEST-087..088` primary/secondary split, added §2 Cross-Cutting `NFR-001..015` matrix, separated Tier 1/2/3/4 gates; archived at `docs/reports/AIVX-B1.1-TRACEABILITY-REPAIR-001.md` |
+| Requirements audit completeness | `PASS` | All 12 ID families audited, reconciled, and cross-checked without renumbering |
+| Feature requirements specification completeness | `PARTIAL / OPEN` | Dedicated FRs/tests remain `OPEN` for `FEAT-04..11`, `PLATFORM-CORE (TEST-001..019)`, cross-cutting NFRs, and Security QA |
+| Phase C (UX/UI Design) entry gate | `BLOCKED / NOT READY` | Requires user approval of **Tier 1 (`DEC-UX-01..05`)** + P0/P1 scope FR check (does **not** require Tier 2 or Tier 3 except exact `SCR-01` auth UI detail) |
+| Phase B overall exit gate | `OPEN / NOT EXITED` | Remains open until Tier 1 UX decisions and in-scope P0/P1 requirement gaps are approved; Tier 2/3 remain tracked for Phase D and Cloud gates |
+| FilmCraft build/test spike | `NOT TESTED` | Pin commit; run isolated Linux cloud build/render spike (Phase D / Tier 2) |
+| Android AIVX implementation | `NOT STARTED` | Waiting for Tier 1 sign-off, Phase C UX design, and bounded vertical-slice approval |
+| Cloud backend & provider gateway | `NOT STARTED` | Blocked on Tier 2 architecture (`ADR-004/005`, `DEC-ARCH-01..03`) and Tier 3 cloud/billing/retention (`ADR-008/009/010/014/015`) |
 | `FEAT-15` visual feedback | `SPECIFIED / NOT TESTED` | `TEST-041..052` defined (`NOT TESTED`); thresholds `OPEN` (`DEC-UX-04`) |
 | External project export | `NOT TESTED` | `TEST-070..080` defined (`NOT TESTED`); target-app import round-trips required |
 | Security QA | `DESIGNED / NOT TESTED` | `SEC-001..030` specified; zero security tests executed |
@@ -89,7 +101,7 @@ All user decisions remain explicitly `OPEN` in `docs/DECISION_LOG.md` (none sele
 
 ## 7. Next Allowed Action
 
-Review `docs/reports/AIVX-B1-DOC-CORRECTIONS-001.md` and submit explicit user decisions on **Tier 1 UX Decisions (`DEC-UX-01..05`)** (and optionally Tier 2/3 decisions in `docs/DECISION_LOG.md`) via a bounded **Phase B2 Decision Sign-Off** task (`AIVX-B2-DECISION-SIGNOFF-001`). Do not begin Phase C UI coding, Android source edits, or cloud/billing provisioning until approved.
+Review `docs/reports/AIVX-B1.1-TRACEABILITY-REPAIR-001.md` and run a bounded **Phase B2 Decision Sign-Off** task (`AIVX-B2-DECISION-SIGNOFF-001`) focused on explicitly approving **Tier 1 UX Decisions (`DEC-UX-01..05`)** in `docs/DECISION_LOG.md` (plus confirming whether any currently under-specified feature from `FEAT-04..11` will enter P0 UX scope). Tier 2 (`ADR-004/005`, `DEC-ARCH-01..03`) and Tier 3 (`ADR-008/009/010/014/015`) may remain `OPEN` for Phase D and pre-cloud provisioning respectively unless the user wishes to decide them now. Do not begin Phase C UI coding, Android source edits, or cloud/billing provisioning until approved.
 
 ---
 

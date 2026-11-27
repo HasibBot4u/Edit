@@ -1,7 +1,7 @@
 # PROJECT_MANIFEST
 
 **Project:** AIVX — Private Online AI Video Editor  
-**Date:** 2026-11-27 (Asia/Dhaka) · **Manifest version:** 1.3  
+**Date:** 2026-11-27 (Asia/Dhaka) · **Manifest version:** 1.4  
 **Purpose:** Authoritative index of all project documents under `docs/`, archived reports under `docs/reports/`, immutable AI Studio upload snapshots under `public/assets/aistudio/`, and historical external upload-bundle references.
 
 ---
@@ -10,8 +10,8 @@
 
 | Path | Purpose | Status | Related IDs / Dependencies | Open questions |
 |---|---|---|---|---|
-| `docs/README.md` | Product context, repository layout, document index, post-B1 workflow | `ACTIVE` | All | Update with each phase |
-| `docs/PROJECT_STATUS.md` | Current phase (`B — IN PROGRESS / NOT EXITED`), A0/B0/B1 evidence, verification matrix, next step | `ACTIVE` | All IDs; `AIVX-A0-INSPECT-001`; `AIVX-B0-ANALYSIS-RECONCILE-001`; `AIVX-B1-DOC-CORRECTIONS-001` | Pending Tier 1–3 user decisions to exit Phase B |
+| `docs/README.md` | Product context, repository layout, document index, post-B1.1 workflow & approval sequence (v1.3) | `ACTIVE` | All | Update with each phase |
+| `docs/PROJECT_STATUS.md` | Current phase (`B — IN PROGRESS / NOT EXITED`), A0/B0/B1/B1.1 evidence, separated readiness states, verification matrix, next step | `ACTIVE` | All IDs; `AIVX-A0-INSPECT-001`; `AIVX-B0-ANALYSIS-RECONCILE-001`; `AIVX-B1-DOC-CORRECTIONS-001`; `AIVX-B1.1-TRACEABILITY-REPAIR-001` | Phase C entry pending Tier 1 (`DEC-UX-01..05`); Tier 2 -> Phase D; Tier 3 -> Cloud |
 | `docs/PROJECT_MANIFEST.md` | Authoritative index of repo docs, reports, snapshots, and external refs | `ACTIVE` | All docs | Update on additions |
 | `docs/AI_INSTRUCTIONS.md` | Persistent AI Build instructions | `ACTIVE` | AIVX-AI | Must be read each session |
 | `docs/GOOGLE_AI_STUDIO_CUSTOM_INSTRUCTIONS.txt` | Copy/upload-ready persistent instruction content | `READY` | AIVX-AI | Verify custom instruction field and limit in active account |
@@ -29,8 +29,8 @@
 | `docs/SECURITY_THREAT_MODEL.md` | Data assets, trust boundaries, threats, `SEC-001..030` and QA matrix | `REQUIRED BEFORE RELEASE` | `SEC-001..030`, `NFR-001..015`, `DATA-001..024`, `RISK-001..032` | Retention/provider consent (`ADR-014`) and Security QA test IDs remain `OPEN` |
 | `docs/RISK_REGISTER.md` | Technical, cost, privacy, and compatibility risks (`RISK-001..032`) | `OPEN` | `RISK-001..032` | Mitigations and verification gates remain `OPEN` |
 | `docs/DECISION_LOG.md` | `ADR-001..018` + Tier 1–4 Open User Decision Register (`DEC-UX-01..05`, `DEC-ARCH-01..03`, `DEC-DEF-01..02`) | `ACTIVE` | `ADR-001..018`, `DEC-UX-01..05`, `DEC-ARCH-01..03`, `DEC-DEF-01..02` | All Tier 1–3 decisions require explicit user approval (`OPEN`) |
-| `docs/TRACEABILITY.md` | Reconciled feature & `PLATFORM-CORE` → FR/NFR/SCR/DATA/API/SEC/TEST mapping | `BASELINE` | `FEAT-01..15`, `PLATFORM-CORE`, `ARCHITECTURE-GATES`, `FR-001..053`, `SCR-01..14`, `DATA-001..024`, `API-001..045`, `SEC-001..030`, `TEST-001..088`, `TEST-ARCH-001..007` | Implementation links and `OPEN` feature test definitions to be added per phase |
-| `docs/TEST_REGISTER.md` | Cross-document test definition register (`TEST-001..088`, `TEST-ARCH-001..007`) | `BASELINE / NOT TESTED` | `TEST-001..088`, `TEST-ARCH-001..007`, `FR-001..053` | `TEST-001..019` `RESERVED/OPEN`; `TEST-039..040` and `FEAT-06..11` tests `OPEN`; `0` tests executed |
+| `docs/TRACEABILITY.md` | Repaired feature/platform traceability (v1.2) + dedicated Cross-Cutting `NFR-001..015` matrix | `BASELINE` | `FEAT-01..15`, `PLATFORM-CORE`, `ARCHITECTURE-GATES`, `FR-001..053`, `NFR-001..015`, `SCR-01..14`, `DATA-001..024`, `API-001..045`, `SEC-001..030`, `TEST-001..088`, `TEST-ARCH-001..007` | Implementation links and `OPEN` feature/NFR test definitions to be added per phase |
+| `docs/TEST_REGISTER.md` | Cross-document test definition register with explicit primary/secondary ownership (v1.1: `TEST-001..088`, `TEST-ARCH-001..007`) | `BASELINE / NOT TESTED` | `TEST-001..088`, `TEST-ARCH-001..007`, `FR-001..053`, `NFR-001..015` | `TEST-001..019` `RESERVED/OPEN`; `TEST-039..040`, `FEAT-06..11`, NFR & Security QA tests `OPEN`; `0` tests executed |
 | `docs/CHANGELOG.md` | Chronological decision and documentation history (Asia/Dhaka timezone noted) | `ACTIVE` | All | Append only; preserve historical entries |
 
 ---
@@ -42,7 +42,8 @@
 | `docs/reports/AIVX-A0-INSPECT-001.md` | Full verbatim Phase A0 workspace & capability inspection report | `NOT AVAILABLE` | `AIVX-A0-INSPECT-001`, `ADR-013` | Original verbatim Turn-1 output is unavailable in session/repo history and was **not** reconstructed; verified A0 facts are recorded in `docs/PROJECT_STATUS.md` and `docs/CHANGELOG.md` |
 | `docs/reports/AIVX-B0-ANALYSIS-RECONCILE-001.md` | Archived Phase B0 requirements, ID integrity, repository audit, open decision register, and doc correction proposal report | `ARCHIVED REPORT` *(immutable)* | `AIVX-B0-ANALYSIS-RECONCILE-001`, All IDs | Preserved verbatim; see `docs/reports/AIVX-B0-REPORT-ERRATA-001.md` for post-archive errata and B1 status |
 | `docs/reports/AIVX-B0-REPORT-ERRATA-001.md` | Post-archive errata supplement for B0 report (FR count 41, F.1 Criterion 3 overstatement, archive timing, CSV bulk IDs) | `ARCHIVED SUPPLEMENT / FACT` | `AIVX-B0-ANALYSIS-RECONCILE-001`, `AIVX-B1-DOC-CORRECTIONS-001` | Preserves immutable B0 history while correcting factual counts/status |
-| `docs/reports/AIVX-B1-DOC-CORRECTIONS-001.md` | Phase B1 documentation, ID, canonical model, test register, traceability, and CSV reconciliation completion report | `ARCHIVED REPORT / FACT` | `AIVX-B1-DOC-CORRECTIONS-001`, All IDs | Documentation-only task; `0` app source/config files changed; Phase B remains `NOT EXITED` pending user decisions |
+| `docs/reports/AIVX-B1-DOC-CORRECTIONS-001.md` | Phase B1 documentation, ID, canonical model, test register, traceability, and CSV reconciliation completion report | `ARCHIVED REPORT / FACT` *(immutable)* | `AIVX-B1-DOC-CORRECTIONS-001`, All IDs | Documentation-only task; preserved verbatim; see `AIVX-B1.1-TRACEABILITY-REPAIR-001.md` for follow-up traceability & gate repairs |
+| `docs/reports/AIVX-B1.1-TRACEABILITY-REPAIR-001.md` | Phase B1.1 independent review and repair of feature/FR/SCR/DATA/API/SEC/TEST ownership, cross-cutting `NFR-001..015` traceability, and Tier 1/2/3/4 phase gates | `ARCHIVED REPORT / FACT` | `AIVX-B1.1-TRACEABILITY-REPAIR-001`, `FEAT-01..15`, `PLATFORM-CORE`, `FR-001..053`, `NFR-001..015`, `TEST-001..088`, `TEST-ARCH-001..007`, `DEC-UX-01..05`, `ADR-004..018` | Documentation-only task; `0` app/config/CSV files modified; Phase B `NOT EXITED`; Phase C blocked on Tier 1 `DEC-UX-01..05` |
 
 ---
 

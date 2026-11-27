@@ -1,8 +1,8 @@
 # AIVX — AI Video Editor: Pre-Build Documentation and Repository Audit
 
-**Document ID:** AIVX-README-001 · **Version:** 1.2 · **Date:** 2026-11-27 (Asia/Dhaka)  
+**Document ID:** AIVX-README-001 · **Version:** 1.3 · **Date:** 2026-11-27 (Asia/Dhaka)  
 **Product:** private online-only native Android AI video editor  
-**Current phase:** B — Requirements Analysis and Documentation Integrity (`IN PROGRESS / NOT EXITED` — A0 completed, B0 archived + errata, B1 documentation corrections applied; Tier 1–3 user decisions remain `OPEN`)  
+**Current phase:** B — Requirements Analysis and Documentation Integrity (`IN PROGRESS / NOT EXITED` — A0 completed, B0 archived + errata, B1 & B1.1 traceability/gate repairs completed; Phase C entry blocked on Tier 1 `DEC-UX-01..05`, while Tier 2/3 belong to Phase D and Cloud gates)  
 **Implementation status:** `NOT STARTED` (only the untouched Android template exists; zero app feature code or cloud/billing resources created)
 
 ---
@@ -99,19 +99,25 @@ See `docs/REPOSITORY_AUDIT.md` and `docs/REPOSITORY_UNIQUE_AUDIT.csv` for full d
 | `docs/ORIGINAL_REPOSITORY_CATALOGUE.txt` | Original user-supplied 412-link source catalogue | `SOURCE (IMMUTABLE)` |
 | `docs/RISK_REGISTER.md` | Risk register (`RISK-001..032`) | `OPEN` |
 | `docs/DECISION_LOG.md` | `ADR-001..018` + Tier 1–4 Open User Decision Register | `ACTIVE` |
-| `docs/TRACEABILITY.md` | Reconciled feature/platform → requirements/screens/data/API/SEC/tests | `BASELINE` |
-| `docs/TEST_REGISTER.md` | Cross-document test register (`TEST-001..088`, `TEST-ARCH-001..007`) | `BASELINE / NOT TESTED` |
+| `docs/TRACEABILITY.md` | Repaired feature/platform & cross-cutting `NFR-001..015` traceability (v1.2) | `BASELINE` |
+| `docs/TEST_REGISTER.md` | Cross-document test register with primary/secondary ownership (`TEST-001..088`, `TEST-ARCH-001..007`) | `BASELINE / NOT TESTED` |
 | `docs/CHANGELOG.md` | Chronological project documentation & decision history | `ACTIVE` |
 | `docs/reports/AIVX-A0-INSPECT-001.md` | Original full A0 readiness report | `NOT AVAILABLE` *(verified summary logged in `docs/PROJECT_STATUS.md`)* |
 | `docs/reports/AIVX-B0-ANALYSIS-RECONCILE-001.md` | Archived Phase B0 requirements & audit report (verbatim) | `ARCHIVED REPORT` |
 | `docs/reports/AIVX-B0-REPORT-ERRATA-001.md` | Post-archive errata & B1 reconciliation tracker for B0 | `ARCHIVED SUPPLEMENT` |
 | `docs/reports/AIVX-B1-DOC-CORRECTIONS-001.md` | Phase B1 documentation reconciliation completion report | `ARCHIVED REPORT` |
+| `docs/reports/AIVX-B1.1-TRACEABILITY-REPAIR-001.md` | Phase B1.1 traceability, test-ownership, NFR & phase-gate repair report | `ARCHIVED REPORT` |
 
 ---
 
-## 8. Current Phase B Workflow & Next Action
+## 8. Current Phase B Workflow & Phase-Specific Approval Sequence
 
 1. **`AIVX-A0-INSPECT-001` (`COMPLETED`):** Native Kotlin/Compose workspace verified (`compile_applet` = `PASS`; `ExampleUnitTest` = `PASS`; `ExampleRobolectricTest` SDK 36 = `FAIL` due to container network fetch; `androidTest`/`adb` = `BLOCKED`). Full verbatim A0 report file is `NOT AVAILABLE`.
 2. **`AIVX-B0-ANALYSIS-RECONCILE-001` (`ARCHIVED` + `ERRATA`):** Archived at `docs/reports/AIVX-B0-ANALYSIS-RECONCILE-001.md` with errata at `docs/reports/AIVX-B0-REPORT-ERRATA-001.md`.
-3. **`AIVX-B1-DOC-CORRECTIONS-001` (`COMPLETED` — Docs Only):** All approved B1 documentation, ID, canonical model, test register, traceability, and CSV reconciliations applied; zero Android app or cloud changes made.
-4. **Next allowed action:** Review `docs/reports/AIVX-B1-DOC-CORRECTIONS-001.md` and explicitly approve the **Tier 1 UX Decisions (`DEC-UX-01..05`)** in `docs/DECISION_LOG.md` (and Tier 2–3 decisions when ready) so Phase B exit criteria can be satisfied before Phase C (UX/UI Design) begins.
+3. **`AIVX-B1-DOC-CORRECTIONS-001` (`COMPLETED` — Docs Only):** Reconciled spec headers, canonical model mappings, `docs/TEST_REGISTER.md`, `docs/TRACEABILITY.md`, `docs/DECISION_LOG.md`, and 264-row unique CSV.
+4. **`AIVX-B1.1-TRACEABILITY-REPAIR-001` (`COMPLETED` — Docs Only):** Repaired `FEAT-06`/`FEAT-08` FR/SCR/DATA/API ownership, eliminated numeric-adjacency mapping leaks, separated primary (`FEAT-13`) vs secondary (`FEAT-14`) ownership of `FR-045..046` / `TEST-087..088`, added Cross-Cutting `NFR-001..015` traceability, and clarified phase-specific approval gates.
+5. **Phase-specific approval gates (next allowed action):**
+   - **Before Phase C (UX/UI Design) begins:** Approve **Tier 1 (`DEC-UX-01..05`)** in `docs/DECISION_LOG.md` and confirm minimum FR readiness for any feature chosen into P0/P1 UX scope (`AIVX-B2-DECISION-SIGNOFF-001`).
+   - **Before Phase D (Technical Architecture) is finalized:** Approve **Tier 2 (`ADR-004/005`, `DEC-ARCH-01..03`)** *(not mandatory to start Phase C unless an exact UX dependency is shown)*.
+   - **Before Backend / Cloud / Storage / GPU provisioning:** Approve **Tier 3 (`ADR-008/009/010/014/015`)** *(not mandatory to start Phase C)*.
+   - **Deferred (`Tier 4`):** `ADR-012`, `ADR-017`, `DEC-DEF-01`, `DEC-DEF-02`.

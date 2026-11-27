@@ -1,6 +1,7 @@
 # AIVX Risk Register
 
-**Document ID:** AIVX-RISK-001 · **Version:** 1.0 · **Date:** 2026-11-26 · **Status:** OPEN / PRE-BUILD
+**Document ID:** AIVX-RISK-001 · **Version:** 1.1 · **Date:** 2026-11-27 (Asia/Dhaka) · **Status:** OPEN / PRE-BUILD  
+**Related:** RISK-001..032 (32 defined risks)
 
 Scales: Probability and Impact are Low/Medium/High. No risk is marked closed until evidence exists.
 

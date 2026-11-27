@@ -1,7 +1,7 @@
 # BYOK Provider Gateway and AI Capability Router
 
-**Document ID:** AIVX-API-001 · **Version:** 1.0 · **Status:** PROPOSAL  
-**Related:** FEAT-13/14/15, API-031..045, SEC-001..008, TEST-060..069
+**Document ID:** AIVX-API-001 · **Version:** 1.1 · **Date:** 2026-11-27 (Asia/Dhaka) · **Status:** PROPOSAL  
+**Related:** FEAT-13/14/15, FR-030..032, FR-035, DATA-017, API-014, API-015, API-031, API-039, SEC-001..008, SEC-010..012, SEC-017..019, TEST-060..069
 
 ## 1. Objective
 

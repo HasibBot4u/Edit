@@ -1,9 +1,9 @@
 # FEAT-15 — Visual Feedback, Region Anchors and Batch AI Revision
 
-**Document ID:** AIVX-FEAT15-001 · **Version:** 1.0 · **Date:** 2026-11-26  
+**Document ID:** AIVX-FEAT15-001 · **Version:** 1.1 · **Date:** 2026-11-27 (Asia/Dhaka)  
 **Status:** APPROVED PRODUCT REQUIREMENT; detailed interaction and backend design PROPOSAL  
 **Priority:** P0/P1 differentiator  
-**Related:** SCR-08, SCR-09, DATA-011..018, API-021..030, SEC-009..015, TEST-041..052, ADR-006
+**Related:** FEAT-15, FR-020..029, SCR-08, SCR-09, DATA-011, DATA-012, DATA-014..016, DATA-018..022, API-021..030, SEC-009..015, TEST-041..052 (agent batch protocol: TEST-053..059), ADR-006
 
 ## 1. User problem
 

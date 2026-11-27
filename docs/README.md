@@ -1,103 +1,117 @@
 # AIVX — AI Video Editor: Pre-Build Documentation and Repository Audit
 
-**Document ID:** AIVX-README-001 · **Version:** 1.1 · **Date:** 26 November 2026  
+**Document ID:** AIVX-README-001 · **Version:** 1.2 · **Date:** 2026-11-27 (Asia/Dhaka)  
 **Product:** private online-only native Android AI video editor  
-**Current phase:** A — Foundation / analysis documentation  
-**Implementation status:** NOT STARTED
+**Current phase:** B — Requirements Analysis and Documentation Integrity (`IN PROGRESS / NOT EXITED` — A0 completed, B0 archived + errata, B1 documentation corrections applied; Tier 1–3 user decisions remain `OPEN`)  
+**Implementation status:** `NOT STARTED` (only the untouched Android template exists; zero app feature code or cloud/billing resources created)
 
-## Google AI Studio ZIP upload workaround
+---
 
-Google AI Studio's supported input formats listed by the user include `.txt`, `.md`, `.html` and `.csv`, but not `.zip`. Therefore:
+## 1. Repository Layout vs External Upload Artefacts (`FACT`)
 
-- Upload `GOOGLE_AI_STUDIO_CUSTOM_INSTRUCTIONS.txt` as the custom instruction reference or copy its text into the Build project's instruction field if available.
-- Upload `GOOGLE_AI_STUDIO_MASTER_BUILD_PROMPT.txt` and paste its contents into the Build prompt.
-- Upload `AI_STUDIO_UPLOAD_MASTER.html` as the main consolidated reference file. It contains the documentation set in one searchable file.
-- Upload `ALL_PROJECT_DOCS.md` as an alternative combined reference if HTML rendering is inconvenient.
-- Attach `REPOSITORY_UNIQUE_AUDIT.csv` and `REPOSITORY_OCCURRENCES_412.csv` separately when the agent needs the full repository table.
-- Upload individual `.md` files only when a task needs a focused specification.
-- The ZIP package is optional backup only. **Do not upload the ZIP to Google AI Studio.**
+Authoritative project documentation now lives inside this GitHub-synced repository under `docs/`:
 
-The user should confirm which file types and file-size limits are currently accepted in their actual AI Studio session. Do not assume the interface supports unlimited attachments. Current Google documentation describes Kotlin + Jetpack Compose native Android Build, browser-based emulator, physical-device install and GitHub import, but the active account/session must be checked. Official docs: https://ai.google.dev/gemini-api/docs/aistudio-build-mode
+1. **Authoritative repository documents (`docs/`):** All 21 baseline specifications, CSV ledgers, `docs/TEST_REGISTER.md`, and archived task reports under `docs/reports/`. Edit and reference files under `docs/`.
+2. **Immutable AI Studio upload snapshots (`public/assets/aistudio/`):** Original session upload snapshots (`AI_STUDIO_UPLOAD_MASTER_2a4612b0.html`, `REPOSITORY_OCCURRENCES_412_a17f05e9.csv`, `REPOSITORY_UNIQUE_AUDIT_616fcf9d.csv`). Retained intact as archival upload evidence — do **not** delete or treat as the mutable source of truth.
+3. **Historical external upload-bundle artefacts (outside `docs/`):** Files created before GitHub sync (`GOOGLE_AI_STUDIO_MASTER_BUILD_PROMPT.txt`, `REPOSITORY_REGISTER_SUMMARY.md`, `ALL_PROJECT_DOCS.md`, `AI_STUDIO_UPLOAD_MASTER.html`, `UPLOAD_GUIDE.txt`, `PACKAGE_VERIFICATION.json`). Not stored inside `docs/`; see `docs/PROJECT_MANIFEST.md` for status.
 
-## Original catalogue reconciliation
+### Google AI Studio attachment note (if attaching files manually in a new session)
 
-The user-provided `ORIGINAL_REPOSITORY_CATALOGUE.txt` contains 412 numbered link occurrences. The occurrence CSV preserves all 412 rows in original order, including duplicates. The unique register contains 264 unique, well-formed GitHub owner/repository identities.
+Google AI Studio's supported attachment formats include `.txt`, `.md`, `.html`, and `.csv`, not `.zip`. When working directly inside this GitHub-synced workspace, read the authoritative files under `docs/` directly rather than re-uploading ZIP backups.
 
-- 411 GitHub-hosted URLs, one GitLab URL.
-- 410 well-formed GitHub owner/repository paths.
+Official Google AI Studio Build docs: https://ai.google.dev/gemini-api/docs/aistudio-build-mode (always verify actual account-level UI controls such as streaming emulator, APK/AAB export, and device install inside the active session).
+
+---
+
+## 2. Original Catalogue Reconciliation (`FACT`)
+
+The user-provided `docs/ORIGINAL_REPOSITORY_CATALOGUE.txt` contains **412** numbered link occurrences. `docs/REPOSITORY_OCCURRENCES_412.csv` preserves all 412 rows in original order verbatim, including duplicates and original URLs. `docs/REPOSITORY_UNIQUE_AUDIT.csv` contains **264** unique, well-formed GitHub owner/repository identities keyed by `first_catalogue_number` (`001..403`).
+
+- 411 GitHub-hosted URLs, one GitLab URL (`#025` Pitivi).
+- 410 well-formed GitHub owner/repository paths; one malformed owner-only GitHub URL (`#315` `https://github.com/cavalry`).
 - 264 unique GitHub repository identities.
 - 108 identities are repeated; 146 additional duplicate occurrences.
-- Catalogue #025 is Pitivi on GitLab.
-- Catalogue #315 is malformed owner-only `https://github.com/cavalry`.
 
-## Evidence limitation — critical
+---
 
-The original catalogue has been fully inventoried and every unique valid GitHub identity has an allocation/status row. A broad set of public README and selected architecture/API/spec/test documents was fetched. **This is not a full source-code audit of every file in all 264 repositories.** Repositories were not all cloned, built, installed, benchmarked or runtime-tested. The CSV distinguishes README evidence, selected deeper docs, incomplete source review and blocked/moved paths. All integrations are `NOT INTEGRATED`; all build/runtime evidence is `NO — not executed`.
+## 3. Evidence Limitation — Critical (`FACT`)
 
-Do not describe the work as “every source file has been deeply audited”. The defensible status is: complete catalogue inventory + unique allocation; partial documentation/source evidence review; source-level and runtime audit outstanding.
+The original catalogue has been fully inventoried and every unique valid GitHub identity has an allocation/status row in `docs/REPOSITORY_UNIQUE_AUDIT.csv`. A broad set of public README and selected architecture/API/spec/test documents was fetched in the baseline review. **This is not a full source-code audit of every file in all 264 repositories.** Repositories were not cloned, built, installed, benchmarked, or runtime-tested. All integrations remain `NOT INTEGRATED`; all build/runtime columns remain `NO — not executed`; per-repository license review remains `OUTSTANDING / NOT VERIFIED` (the CSV `license_policy` text is a policy reminder, not a license audit).
 
-## Product decisions
+---
 
-- **APPROVED:** private use, native Android, Kotlin + Compose preferred, online-only processing, BYOK provider support, prompt editing, visual region comments and batch Run, manual professional editing, no public business/monetization.
-- **PROPOSAL:** cloud control plane; server-authoritative canonical project model; FilmCraft as NLE candidate; FFmpeg media foundation; OpenFilm annotation UX pattern; specialist model/render workers.
-- **OPEN:** cloud vendor/region, budget and payment ability, backend/database/storage/queue, identity/friend roles, project retention, final engine, GPU availability, export priorities, device support and exact external AI providers.
+## 4. Product Decisions Summary
 
-## Architecture summary
+- **`APPROVED`:** Private use (owner + a few invited friends), genuine native Android (Kotlin + Jetpack Compose preferred), online-only cloud processing, BYOK provider support (server-side secrets only), prompt editing/generation, FEAT-15 visual region comments + batch Run, manual professional editing, no public marketing/monetization.
+- **`PROPOSAL`:** Cloud control plane; server-authoritative canonical project model; `#004 storytold/filmcraft` as primary NLE candidate (requires bounded cloud feasibility spike); FFmpeg media foundation; OpenFilm annotation UX pattern; specialist isolated workers.
+- **`OPEN` (User Decision Required — see `docs/DECISION_LOG.md`):** P0 vs P1/P2 priority (`DEC-UX-01`), `minSdk`/orientation (`DEC-UX-02`), friend roles (`DEC-UX-03`), FEAT-15 thresholds (`DEC-UX-04`), offline UX (`DEC-UX-05`), final NLE engine (`ADR-004/005`), preview transport (`DEC-ARCH-01`), initial BYOK adapters (`DEC-ARCH-02`), auth method (`DEC-ARCH-03`), billing/cost ceilings (`ADR-010`), cloud vendor/region (`ADR-015`), GPU policy (`ADR-009`), media retention/consent (`ADR-014`), vault implementation (`ADR-008`), and first external export target (`ADR-012` — `DEFERRED`).
 
-Android is a native client for projects, timeline, preview, annotation and job controls. It must not be the private server runtime. Cloud services handle canonical project state, storage, provider secrets, analysis, AI generation, media processing, final rendering, interchange and quality checks. All paid resources require explicit approval.
+---
 
-## Priority repository allocations
+## 5. Architecture Summary
 
-- `storytold/filmcraft`: primary headless NLE engine candidate; requires isolated build/test/API/render feasibility gate.
-- `FFmpeg/FFmpeg`: probe/decode/encode/media filter foundation.
-- `openfilm/openfilm`: point/circle/time-range annotation UX reference for FEAT-15.
-- `JuneYaooo/rea-video`: shot-level reverse-analysis worker candidate.
-- `FireRedTeam/FireRed-OpenStoryline`: optional script/storyboard/creative planning worker.
-- `inematds/mcp-video`: selected media/QC tool patterns.
-- `Augani/openreel-video` / `openreelio/openreelio`: agent transaction/event sourcing patterns.
-- `AcademySoftwareFoundation/OpenTimelineIO`: interchange adapter, with feature-loss reports.
-- `AIEraDev/Clypra`: timeline/timebase/performance engineering reference.
-- `Natron`, `Blender`, SAM2, RAFT, ProPainter, RIFE, Gyroflow, ASR/TTS/music and ComfyUI tools: isolated optional workers, not Android APK payload.
+Android is a native client for workspace/projects, timeline UI, preview playback, FEAT-15 annotation, comment queue, plan approval, job tracking, and export download. It is **not** a server runtime. Separate authenticated cloud services own canonical project state, object storage, encrypted BYOK secrets, AI orchestration, media processing, final rendering, interchange, and QC. No cloud service or paid resource may be created without explicit user approval and cost disclosure.
 
-See `REPOSITORY_AUDIT.md` and `REPOSITORY_UNIQUE_AUDIT.csv` for detailed allocations and caveats.
+---
 
-## Document map
+## 6. Priority Repository Allocations (Catalogue vs Non-Catalogue)
+
+### In-catalogue priority candidates (part of the 412 / 264 ledger)
+- `#004 storytold/filmcraft`: primary headless NLE engine candidate; requires isolated build/test/API/render feasibility gate (`NOT TESTED`).
+- `#037 FFmpeg/FFmpeg`: probe/decode/encode/media filter foundation (`NOT INTEGRATED`).
+- `#003 openfilm/openfilm`: point/circle/time-range annotation UX reference for FEAT-15.
+- `#193 JuneYaooo/rea-video`: shot-level reverse-analysis worker candidate.
+- `#008 FireRedTeam/FireRed-OpenStoryline`: optional script/storyboard/creative planning worker.
+- `#142 inematds/mcp-video`: selected media/QC tool patterns (sandboxed subset only).
+- `#141 Augani/openreel-video`: agent dry-run/transaction/undo architecture reference.
+- `#046 AcademySoftwareFoundation/OpenTimelineIO`: interchange adapter with feature-loss reports.
+- `#139 AIEraDev/Clypra`: timeline/timebase/performance engineering reference.
+- `#023 Natron`, `#021 Blender`, `#226 SAM2`, `#304 RAFT`, `#301 ProPainter`, `#071 RIFE`, `#303 Gyroflow`, ASR/TTS/music, and ComfyUI tools: isolated optional cloud workers, never Android APK payloads.
+
+### Non-catalogue external research references (NOT counted in 412 or 264; `NOT VERIFIED`)
+- `openreelio/openreelio`: external command/event-sourcing and plugin-permission reference (`NOT VERIFIED`).
+- `filmcraft-desktop/filmcraft`: external disambiguation target noted solely to distinguish from `#004 storytold/filmcraft` (`NOT VERIFIED`).
+
+See `docs/REPOSITORY_AUDIT.md` and `docs/REPOSITORY_UNIQUE_AUDIT.csv` for full details and caveats.
+
+---
+
+## 7. Authoritative Document Map (`docs/`)
 
 | File | Purpose | Status |
 |---|---|---|
-| `PROJECT_STATUS.md` | Current phase, verified evidence, blockers, next step | ACTIVE |
-| `PROJECT_MANIFEST.md` | Authoritative document index | ACTIVE |
-| `AI_INSTRUCTIONS.md` | Persistent agent instructions | ACTIVE |
-| `GOOGLE_AI_STUDIO_CUSTOM_INSTRUCTIONS.txt` | Copy/upload-ready AI Studio instructions | READY |
-| `GOOGLE_AI_STUDIO_MASTER_BUILD_PROMPT.txt` | Bounded first Build task: inspect/verify/report only | READY |
-| `PRD_SRS.md` | Product and functional/non-functional requirements | BASELINE |
-| `ARCHITECTURE.md` | Client/cloud/service architecture | PROPOSAL |
-| `CANONICAL_PROJECT_MODEL.md` | Canonical editable project data and command contract | PROPOSAL |
-| `FEAT15_VISUAL_FEEDBACK.md` | Circle/point/time comments and batch Run specification | APPROVED REQUIREMENT / PROPOSAL DESIGN |
-| `PROVIDER_GATEWAY.md` | BYOK capability and secret model | PROPOSAL |
-| `AI_AGENT_EDIT_PROTOCOL.md` | Tool permissions, plan, approval, apply and verify loop | PROPOSAL |
-| `EXPORT_INTERCHANGE.md` | Rendered output and editable export compatibility | PROPOSAL |
-| `SECURITY_THREAT_MODEL.md` | Threats and controls | REQUIRED BEFORE RELEASE |
-| `REPOSITORY_AUDIT.md` | Repository specialty and allocation report | PARTIAL SOURCE AUDIT |
-| `REPOSITORY_UNIQUE_AUDIT.csv` | One row per unique GitHub repository | 264 rows |
-| `REPOSITORY_OCCURRENCES_412.csv` | Original 412 catalogue occurrences, duplicates intact | 412 rows |
-| `REPOSITORY_REGISTER_SUMMARY.md` | Exact counts and next audit method | ACTIVE |
-| `RISK_REGISTER.md` | Risk inventory | OPEN |
-| `DECISION_LOG.md` | Approved/proposed/open decisions | ACTIVE |
-| `TRACEABILITY.md` | Feature/requirement/screen/data/API/security/test mapping | BASELINE |
-| `CHANGELOG.md` | Change history | ACTIVE |
-| `ALL_PROJECT_DOCS.md` | Combined Markdown reference | READY |
-| `AI_STUDIO_UPLOAD_MASTER.html` | Combined searchable HTML reference for AI Studio | READY |
+| `docs/README.md` | Product context, repository layout, document index, next step | `ACTIVE` |
+| `docs/PROJECT_STATUS.md` | Current phase, A0/B0/B1 evidence, blockers, verification matrix | `ACTIVE` |
+| `docs/PROJECT_MANIFEST.md` | Authoritative index of all repo docs, reports, and snapshots | `ACTIVE` |
+| `docs/AI_INSTRUCTIONS.md` | Persistent AI Build instructions | `ACTIVE` |
+| `docs/GOOGLE_AI_STUDIO_CUSTOM_INSTRUCTIONS.txt` | Copy-ready AI Studio persistent custom instructions | `READY` |
+| `docs/PRD_SRS.md` | Product vision, scope, journeys, 41 defined FRs, 15 NFRs | `BASELINE` |
+| `docs/ARCHITECTURE.md` | Client/cloud/services architecture & `TEST-ARCH-001..007` | `PROPOSAL` |
+| `docs/CANONICAL_PROJECT_MODEL.md` | Canonical project entities (`DATA-001..024`), timebase & commands | `PROPOSAL` |
+| `docs/FEAT15_VISUAL_FEEDBACK.md` | Visual annotations, comments, batch Run & `TEST-041..052` | `APPROVED REQUIREMENT / PROPOSAL DESIGN` |
+| `docs/PROVIDER_GATEWAY.md` | BYOK capability manifest, SSRF/vault rules & `TEST-060..069` | `PROPOSAL` |
+| `docs/AI_AGENT_EDIT_PROTOCOL.md` | Typed tools, plan/approval/apply/QC loop & `TEST-053..059` | `PROPOSAL` |
+| `docs/EXPORT_INTERCHANGE.md` | Rendered outputs, interchange loss reports & `TEST-070..080` | `PROPOSAL` |
+| `docs/SECURITY_THREAT_MODEL.md` | Threat model, `SEC-001..030` & security QA requirements | `REQUIRED BEFORE RELEASE` |
+| `docs/REPOSITORY_AUDIT.md` | Repository specialty allocations, non-catalogue refs & caveats | `PARTIAL SOURCE AUDIT` |
+| `docs/REPOSITORY_UNIQUE_AUDIT.csv` | 264 unique GitHub repos keyed by `first_catalogue_number` | `PARTIAL SOURCE AUDIT / 264 rows` |
+| `docs/REPOSITORY_OCCURRENCES_412.csv` | Original 412 catalogue occurrences preserved verbatim | `PASS / 412 rows` |
+| `docs/ORIGINAL_REPOSITORY_CATALOGUE.txt` | Original user-supplied 412-link source catalogue | `SOURCE (IMMUTABLE)` |
+| `docs/RISK_REGISTER.md` | Risk register (`RISK-001..032`) | `OPEN` |
+| `docs/DECISION_LOG.md` | `ADR-001..018` + Tier 1–4 Open User Decision Register | `ACTIVE` |
+| `docs/TRACEABILITY.md` | Reconciled feature/platform → requirements/screens/data/API/SEC/tests | `BASELINE` |
+| `docs/TEST_REGISTER.md` | Cross-document test register (`TEST-001..088`, `TEST-ARCH-001..007`) | `BASELINE / NOT TESTED` |
+| `docs/CHANGELOG.md` | Chronological project documentation & decision history | `ACTIVE` |
+| `docs/reports/AIVX-A0-INSPECT-001.md` | Original full A0 readiness report | `NOT AVAILABLE` *(verified summary logged in `docs/PROJECT_STATUS.md`)* |
+| `docs/reports/AIVX-B0-ANALYSIS-RECONCILE-001.md` | Archived Phase B0 requirements & audit report (verbatim) | `ARCHIVED REPORT` |
+| `docs/reports/AIVX-B0-REPORT-ERRATA-001.md` | Post-archive errata & B1 reconciliation tracker for B0 | `ARCHIVED SUPPLEMENT` |
+| `docs/reports/AIVX-B1-DOC-CORRECTIONS-001.md` | Phase B1 documentation reconciliation completion report | `ARCHIVED REPORT` |
 
-## Upload workflow
+---
 
-1. Open Google AI Studio Build mode in the browser.
-2. Verify that the active session visibly offers native Android/Kotlin/Compose Build mode. If not, stop; do not accept a web substitute.
-3. Attach the Custom Instructions `.txt`, Master Build Prompt `.txt`, and `AI_STUDIO_UPLOAD_MASTER.html`.
-4. Attach the two CSV files if the UI permits. If it enforces a small attachment count, use the HTML master first and add the CSVs in a second message.
-5. Paste the Master Build Prompt exactly. It asks for inspection and a gap report, not code edits.
-6. Review the capability report and approve the next bounded task before implementation.
+## 8. Current Phase B Workflow & Next Action
 
-## Current next action
-
-Run the `AIVX-A0-INSPECT-001` master prompt in Build mode. Do not create paid cloud resources or generate the complete editor yet. First verify native Build availability, inspect workspace/docs, and list gaps/open decisions.
+1. **`AIVX-A0-INSPECT-001` (`COMPLETED`):** Native Kotlin/Compose workspace verified (`compile_applet` = `PASS`; `ExampleUnitTest` = `PASS`; `ExampleRobolectricTest` SDK 36 = `FAIL` due to container network fetch; `androidTest`/`adb` = `BLOCKED`). Full verbatim A0 report file is `NOT AVAILABLE`.
+2. **`AIVX-B0-ANALYSIS-RECONCILE-001` (`ARCHIVED` + `ERRATA`):** Archived at `docs/reports/AIVX-B0-ANALYSIS-RECONCILE-001.md` with errata at `docs/reports/AIVX-B0-REPORT-ERRATA-001.md`.
+3. **`AIVX-B1-DOC-CORRECTIONS-001` (`COMPLETED` — Docs Only):** All approved B1 documentation, ID, canonical model, test register, traceability, and CSV reconciliations applied; zero Android app or cloud changes made.
+4. **Next allowed action:** Review `docs/reports/AIVX-B1-DOC-CORRECTIONS-001.md` and explicitly approve the **Tier 1 UX Decisions (`DEC-UX-01..05`)** in `docs/DECISION_LOG.md` (and Tier 2–3 decisions when ready) so Phase B exit criteria can be satisfied before Phase C (UX/UI Design) begins.

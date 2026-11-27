@@ -1,8 +1,8 @@
 # AIVX — Canonical Editable Project Model
 
-**Document ID:** AIVX-DATA-001 · **Version:** 1.0 · **Date:** 2026-11-26  
+**Document ID:** AIVX-DATA-001 · **Version:** 1.1 · **Date:** 2026-11-27 (Asia/Dhaka)  
 **Status:** PROPOSAL; no engine or DB schema is final.  
-**Related:** FEAT-01..15, DATA-001..030, API-001..045, ADR-003, TEST-020..039
+**Related:** FEAT-01..15, DATA-001..024, API-001..045, ADR-003..005, TEST-020..039 (see `docs/TEST_REGISTER.md`)
 
 ## 1. Source-of-truth rules
 
@@ -16,24 +16,37 @@
 
 ## 2. Core entities
 
-| Entity | Key fields | Notes |
-|---|---|---|
-| Project | `projectId`, `ownerId`, `memberIds`, `schemaVersion`, `revision`, `settings`, `sequenceIds`, `assetIds` | One private editing workspace |
-| Sequence | `sequenceId`, `projectId`, `frameRate`, `width`, `height`, `pixelAspect`, `colorConfig`, `audioSampleRate`, `trackIds`, `duration` | Timebase and output settings |
-| Track | `trackId`, `sequenceId`, `kind`, `zOrder`, `visible`, `locked`, `muted`, `solo`, `blendMode`, `trackEffects` | A layer lane |
-| Clip | `clipId`, `trackId`, `assetId`, `kind`, `timelineStart`, `timelineDuration`, `sourceIn`, `sourceOut`, `speed`, `transform`, `opacity`, `effects`, `keyframeTracks` | Clip instance, not source asset |
-| Asset | `assetId`, `objectKey`, `sha256`, `mediaKind`, `probe`, `duration`, `streams`, `derivatives`, `provenance` | Immutable input/derived media |
-| TextLayer | `textLayerId`, `clipId`, `text`, `fontRef`, `fontSize`, `fontWeight`, `tracking`, `leading`, `fill`, `stroke`, `shadow`, `alignment`, `animation` | Native editable text where supported |
-| ShapeLayer | `shapeId`, `geometry`, `fill`, `stroke`, `transform`, `keyframes` | Shape/vector object |
-| Effect | `effectId`, `effectType`, `params`, `enabled`, `maskIds`, `keyframeTracks`, `engineId`, `version` | Typed effect instance |
-| Mask | `maskId`, `path`, `feather`, `expansion`, `opacity`, `inverted`, `mode`, `trackingBinding` | Path geometry and temporal data |
-| KeyframeTrack | `targetId`, `propertyPath`, `interpolation`, `keyframes[]` | Per-property animation curve |
-| Marker | `markerId`, `time`, `label`, `color`, `notes` | Sequence marker |
-| Annotation | `annotationId`, `revision`, `sequenceId`, `timeAnchor`, `rangeAnchor`, `geometry`, `candidateTargets`, `commentId` | Exact visual feedback anchor |
-| Comment | `commentId`, `text`, `status`, `priority`, `annotationId`, `createdBy`, `createdAt` | User intent tied to evidence |
-| Operation | `operationId`, `commandType`, `targetIds`, `payload`, `baseRevision`, `resultRevision`, `inversePayload`, `actor`, `source` | Manual or AI operation audit record |
-| EditPlan | `planId`, `basedOnRevision`, `operations[]`, `conflicts[]`, `confidence`, `costEstimate`, `evidenceRefs`, `approvalState` | AI proposal before applying |
-| Job | `jobId`, `jobType`, `status`, `progress`, `inputRevision`, `workerVersion`, `costEstimate`, `actualCost`, `resultAssetIds`, `error` | Async operation lifecycle |
+| Entity | Data ID | Key fields | Notes |
+|---|---|---|---|
+| Project | `DATA-001` | `projectId`, `ownerId`, `memberIds`, `schemaVersion`, `revision`, `settings`, `sequenceIds`, `assetIds` | One private editing workspace |
+| Sequence | `DATA-002` | `sequenceId`, `projectId`, `frameRate`, `width`, `height`, `pixelAspect`, `colorConfig`, `audioSampleRate`, `trackIds`, `duration` | Timebase and output settings; companion `DATA-003 SequenceSettings` nesting/normalization is `OPEN` |
+| Track | `DATA-006` | `trackId`, `sequenceId`, `kind`, `zOrder`, `visible`, `locked`, `muted`, `solo`, `blendMode`, `trackEffects` | A layer lane |
+| Clip | `DATA-007` | `clipId`, `trackId`, `assetId`, `kind`, `timelineStart`, `timelineDuration`, `sourceIn`, `sourceOut`, `speed`, `transform`, `opacity`, `effects`, `keyframeTracks` | Clip instance, not source asset |
+| Asset | `DATA-004` | `assetId`, `objectKey`, `sha256`, `mediaKind`, `probe`, `duration`, `streams`, `derivatives`, `provenance` | Immutable input/derived media; companion `DATA-005 AssetProbe` storage relation is `OPEN` |
+| TextLayer | `DATA-008` *(subtype)* | `textLayerId`, `clipId`, `text`, `fontRef`, `fontSize`, `fontWeight`, `tracking`, `leading`, `fill`, `stroke`, `shadow`, `alignment`, `animation` | Native editable text subtype of `DATA-008 LayerObject` where supported |
+| ShapeLayer | `DATA-008` *(subtype)* | `shapeId`, `geometry`, `fill`, `stroke`, `transform`, `keyframes` | Shape/vector subtype of `DATA-008 LayerObject` |
+| Effect | `DATA-009` | `effectId`, `effectType`, `params`, `enabled`, `maskIds`, `keyframeTracks`, `engineId`, `version` | Typed effect instance |
+| Mask | `DATA-013` | `maskId`, `path`, `feather`, `expansion`, `opacity`, `inverted`, `mode`, `trackingBinding` | Path geometry and temporal data |
+| KeyframeTrack | `DATA-010` | `targetId`, `propertyPath`, `interpolation`, `keyframes[]` | Per-property animation curve |
+| Marker | `OPEN` *(unassigned)* | `markerId`, `time`, `label`, `color`, `notes` | Sequence marker; no standalone `DATA-*` ID assigned yet (candidate sub-entity of `DATA-002 Sequence` — `OPEN`) |
+| Annotation | `DATA-011` | `annotationId`, `revision`, `sequenceId`, `timeAnchor`, `rangeAnchor`, `geometry`, `candidateTargets`, `commentId` | Exact visual feedback anchor |
+| Comment | `DATA-012` | `commentId`, `text`, `status`, `priority`, `annotationId`, `createdBy`, `createdAt` | User intent tied to evidence |
+| Operation | `DATA-019` | `operationId`, `commandType`, `targetIds`, `payload`, `baseRevision`, `resultRevision`, `inversePayload`, `actor`, `source` | Manual or AI operation audit record; grouped by `DATA-020 OperationBatch` (`OPEN` schema relation) |
+| EditPlan | `DATA-018` | `planId`, `basedOnRevision`, `operations[]`, `conflicts[]`, `confidence`, `costEstimate`, `evidenceRefs`, `approvalState` | AI proposal before applying |
+| Job | `DATA-021` | `jobId`, `jobType`, `status`, `progress`, `inputRevision`, `workerVersion`, `costEstimate`, `actualCost`, `resultAssetIds`, `error` | Async operation lifecycle |
+
+### 2.1 Companion `DATA-001..024` entities and unresolved relationships (`OPEN`)
+
+The following entities are defined in the `docs/TRACEABILITY.md` Data ID map (`DATA-001..024`) and are referenced across feature/security specifications, but their exact relational/document embedding and foreign-key schema with the core entities above remain **`OPEN`** until Phase D technical schema approval (no production DB schema or migration is defined yet):
+
+- `DATA-003` (`SequenceSettings`): whether embedded inside `DATA-002 Sequence` or stored as a versioned preset reference (`OPEN`).
+- `DATA-005` (`AssetProbe`): whether embedded inside `DATA-004 Asset` or stored as a separate immutable probe record (`OPEN`).
+- `DATA-008` (`LayerObject`): exact discriminator contract across `TextLayer`, `ShapeLayer`, vector, adjustment, and future 3D/generated overlay subtypes (`OPEN`).
+- `Marker`: no standalone `DATA-*` ID exists in `DATA-001..024`; whether `Marker` lives as a sub-entity of `DATA-002 Sequence` or receives a future `DATA-*` ID is `OPEN`.
+- `DATA-014` (`Transcript`), `DATA-015` (`OCRRecord`), `DATA-016` (`AnalysisReport`): analysis artefacts linked to `DATA-004 Asset`, `DATA-002 Sequence`, and `DATA-011 Annotation` (`OPEN`).
+- `DATA-017` (`ProviderProfile`): server-side BYOK configuration owned by user, referenced by `DATA-018 EditPlan` and `DATA-021 Job` (see `docs/PROVIDER_GATEWAY.md`).
+- `DATA-020` (`OperationBatch`): atomic grouping of `DATA-019 Operation` records for batch apply/undo (`OPEN`).
+- `DATA-022` (`RenderOutput`), `DATA-023` (`Membership`), `DATA-024` (`AuditEvent`): output manifest, project sharing roles, and security audit log entities (`OPEN`).
 
 ## 3. Time representation
 

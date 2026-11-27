@@ -1,7 +1,7 @@
 # AI Agent Editing Protocol — Inspect, Plan, Approve, Apply, Verify
 
-**Document ID:** AIVX-API-002 · **Version:** 1.0 · **Status:** PROPOSAL  
-**Related:** FEAT-13/14/15, API-020..030, DATA-018..024, SEC-009..020, TEST-041..059
+**Document ID:** AIVX-API-002 · **Version:** 1.1 · **Date:** 2026-11-27 (Asia/Dhaka) · **Status:** PROPOSAL  
+**Related:** FEAT-13/14/15, API-018..030, DATA-018..024, SEC-009..020, TEST-053..059 (FEAT-15 visual feedback: TEST-041..052)
 
 ## 1. Core rule
 

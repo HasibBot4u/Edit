@@ -1,9 +1,9 @@
 # Repository Catalogue Audit and Allocation Report
 
-**Document ID:** AIVX-REPO-001 · **Version:** 1.0 · **Date:** 2026-11-26  
+**Document ID:** AIVX-REPO-001 · **Version:** 1.1 · **Date:** 2026-11-27 (Asia/Dhaka)  
 **Status:** CATALOGUE INVENTORY COMPLETE; SOURCE/BUILD AUDIT PARTIAL  
-**Source:** user-uploaded `ORIGINAL_REPOSITORY_CATALOGUE.txt` (`turn167file0`)  
-**Related:** `REPOSITORY_OCCURRENCES_412.csv`, `REPOSITORY_UNIQUE_AUDIT.csv`, REPO-001..REPO-264
+**Source:** user-uploaded `docs/ORIGINAL_REPOSITORY_CATALOGUE.txt` (`turn167file0`)  
+**Related:** `docs/REPOSITORY_OCCURRENCES_412.csv`, `docs/REPOSITORY_UNIQUE_AUDIT.csv` (primary row key: `first_catalogue_number` across 264 unique GitHub identities; no separate `REPO-001..264` column exists in the CSV)
 
 ## 1. Exact catalogue reconciliation
 
@@ -16,7 +16,7 @@ The original file contains 412 numbered occurrences and was read from first to l
 - 108 identities appear more than once; their repeated references add 146 extra occurrences.
 - GitLab Pitivi is preserved as its own original occurrence (#025) and must not be conflated with GitHub mirrors.
 
-The 412-row occurrence ledger preserves exact user order and duplicates. The 264-row unique audit register has an allocation/status for each unique GitHub identity. The malformed URL and GitLab source are separately described in the README and ledger.
+The 412-row occurrence ledger (`docs/REPOSITORY_OCCURRENCES_412.csv`) preserves exact user order, original URLs, and duplicates verbatim. The 264-row unique audit register (`docs/REPOSITORY_UNIQUE_AUDIT.csv`) uses `first_catalogue_number` (`001..403`) as its primary key and records an allocation/status for each unique GitHub identity. No `REPO-001..264` column is invented in the CSV. The malformed URL (`#315`) and GitLab source (`#025`) are preserved in the occurrence ledger and documented separately.
 
 ## 2. What “deep audit” means here — and what was actually done
 
@@ -66,9 +66,7 @@ Allocation terms:
 | `openfilm/openfilm` | Primary FEAT-15 UX reference | User can click a moment, drag a time span or circle a frame region, then agent knows target. Its HTML/CSS film format is not adopted as canonical project. |
 | `0xsline/OpenChatCut` | AI-native editor/tool UX reference | Real editable tracks, agent writes operations, undo/redo, MCP and media-generation flows. Not native Android. |
 | `Augani/openreel-video` | Agent action/dry-run architecture reference | Typed tools, confirmation, undoable agent turns and project-as-source-of-truth; its own docs expose readiness gaps. |
-| `openreelio/openreelio` | Command/event-sourcing and plugin security reference | Append-only command log, JSON commands, jobs, QC and WASM plugin permission model. Not Android UI. |
 | `jub0t/Concat` | NLE feature and mobile platform reference | Repository claims Android/iOS plus Rust/FFmpeg; product is local-first and therefore conflicts with online-only processing. |
-| `filmcraft-desktop/filmcraft` | Related engine identity to investigate | Similar FilmCraft brand/architecture; must determine fork/relation before treating as independent implementation. Primary candidate selection is `storytold/filmcraft`. |
 | `Monet-AI-Editor/Monet` | Reference | macOS editor, timeline and agent terminal; platform-incompatible. |
 | `cartesiancs/cartcut` | Reference/adapt selected MCP UX | Browser editor, live timeline via MCP. |
 | `ronak-create/FableCut` | Reference/adapt JSON timeline pattern | Browser editor; editable timeline represented as JSON and live updates. |
@@ -139,6 +137,15 @@ Allocation terms:
 
 The various awesome lists, `SKILL.md` repositories, motion/effect libraries and coding-agent toolkits are research/catalogue/recipe material. They are not all runtime services. Before adapting a skill: inspect its complete entry file, scripts, downloaded assets, network targets and dependencies; convert only its relevant recipe into an internal tested AIVX tool. Do not install a 100+ skill pack indiscriminately.
 
+### 3.10 Non-Catalogue External Research References (Not Counted in 412 or 264)
+
+The following two repositories are **NOT** present in `docs/ORIGINAL_REPOSITORY_CATALOGUE.txt`, `docs/REPOSITORY_OCCURRENCES_412.csv` (412 rows), or `docs/REPOSITORY_UNIQUE_AUDIT.csv` (264 unique rows). They are tracked separately as external research/disambiguation references only and remain **`NOT VERIFIED`** (no pinned commit, source audit, or build has been performed):
+
+| External Reference | Status | Why Mentioned / Caveat |
+|---|---|---|
+| `openreelio/openreelio` | `NOT VERIFIED` (Non-catalogue external research reference) | Mentioned for command/event-sourcing and plugin-permission architecture patterns. Not in the 412/264 catalogue; do not treat as verified or approved dependency without pinned-commit source audit. |
+| `filmcraft-desktop/filmcraft` | `NOT VERIFIED` (Non-catalogue disambiguation target) | Mentioned solely to disambiguate from catalogue entry `#004 storytold/filmcraft`. Fork/lineage relationship is unverified; primary NLE candidate remains `#004 storytold/filmcraft`. |
+
 ## 4. Corrections, moved repositories and blocked identities
 
 Examples found during review: `edenfun/reelmimic` resolves to `edenfunf/reelmimic`; `ComfyUI-Manager` is now discoverable under `Comfy-Org/ComfyUI-Manager`; `NatronGitHub/openfx-io` was accessible while the original `AcademySoftwareFoundation/openfx-io` URL returned 404. Other entries returned 404 or were not readable (`HKUDS/VideoAgent`, some ComfyUI wrapper links, OpenMontage README, etc.). Keep the user's original URLs unchanged in the occurrence CSV; place verified correction/mirror in the unique register only.
@@ -158,6 +165,9 @@ AIVX should define an internal capability registry with adapter contracts: `Medi
 7. Add optional segmentation/tracking/inpaint/interpolation/3D/VFX workers by user demand.
 8. Add less-used catalogue tools only when a measurable acceptance test needs them.
 
-## 7. Repository audit evidence status
+## 7. Repository audit evidence status & license-audit limitation
 
-See `REPOSITORY_UNIQUE_AUDIT.csv`. `README / PRIMARY DOCS REVIEWED` means overview text was available; it does not mean full source audit. `README + selected technical docs` means architecture/API/test docs were also fetched. `CATALOGUED; SOURCE REVIEW INCOMPLETE` and `BLOCKED / NEEDS SOURCE RECHECK` must remain open. All build/runtime columns are NO / NOT EXECUTED. All integrations are NOT INTEGRATED.
+See `docs/REPOSITORY_UNIQUE_AUDIT.csv`. `README / PRIMARY DOCS REVIEWED` means overview text was available; it does not mean full source audit. `README + selected technical docs` means architecture/API/test docs were also fetched. `CATALOGUED; SOURCE REVIEW INCOMPLETE` and `BLOCKED / NEEDS SOURCE RECHECK` must remain open. All build/runtime columns are `NO — not executed`. All integrations are `NOT INTEGRATED`.
+
+- **Suspect-entry reconciliation (`AIVX-B1-DOC-CORRECTIONS-001`):** Seven entries flagged in `AIVX-B0-ANALYSIS-RECONCILE-001` (`#014 chang416/cutcraft`, `#043 tnfe/FFCreator`, `#047 GStreamer/gstreamer`, `#140 openvideodev/react-video-editor`, `#290 AILab-CVC/VideoCrafter`, `#362 Vincentwei1021/video-talkcraft`, and `#367 cclank/lanshu-create-ai-presenter-video`) had unsupported copy-paste templates or cross-document contradictions; they have been set to `BLOCKED / NEEDS SOURCE RECHECK` (`Not directly verified`) in `docs/REPOSITORY_UNIQUE_AUDIT.csv` rather than inventing unverified capabilities. Entry `#137 pitivi/pitivi` was also aligned so `audit_depth` = `Not directly verified` matches its `BLOCKED / NEEDS SOURCE RECHECK` status and GitLab-source note.
+- **License-policy limitation (`FACT`):** The repeated generic string in the CSV `license_policy` column (`"User handles legal review; technical compatibility and security review still required"`) is a **project policy reminder only — it is NOT a per-repository license audit**. Actual per-repository license inspection remains **`OUTSTANDING / NOT VERIFIED`** and must be performed alongside pinned-commit source/security audits before any single repository is adopted.

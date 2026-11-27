@@ -1,10 +1,10 @@
 # AIVX — System Architecture and Technical Design
 
 **Document ID:** AIVX-ARCH-001  
-**Version:** 1.0 · **Date:** 2026-11-26  
+**Version:** 1.1 · **Date:** 2026-11-27 (Asia/Dhaka)  
 **Status:** PROPOSAL — not yet approved as a deployable cloud design  
 **Phase:** D — Technical Design  
-**Related IDs:** ADR-001..ADR-012, FEAT-01..FEAT-15, FR-001..FR-090, NFR-001..NFR-045, DATA-001..DATA-030, API-001..API-045, SEC-001..SEC-030, TEST-001..TEST-080, RISK-001..RISK-040
+**Related IDs:** ADR-001..ADR-018, FEAT-01..FEAT-15, FR-001..FR-053 (41 defined), NFR-001..NFR-015, DATA-001..DATA-024, API-001..API-045, SEC-001..SEC-030, TEST-001..TEST-088 (see `docs/TEST_REGISTER.md`), TEST-ARCH-001..TEST-ARCH-007, RISK-001..RISK-032
 
 ## 1. Purpose and non-negotiable constraints
 
@@ -86,7 +86,7 @@ Long jobs are asynchronous and checkpointed. Worker classes: `MEDIA_PROBE`, `PRO
 
 ## 4. Canonical editing engine strategy
 
-**Primary candidate:** `storytold/filmcraft` headless Rust NLE. Its architecture documents an engine-first session/command model, exact integer ticks and rational frame rates, a CPU-reference/GPU-fast-path renderer, project schema versioning, undo, scopes, codecs and multiple interchange formats. Its current repository README/docs are evidence of design, not proof that it compiles on our cloud target or fits our data model. `filmcraft-desktop/filmcraft` has a similar architecture tree and should not be assumed identical to `storytold/filmcraft`; the latter has the more extensive architecture/testing/project-files/interchange documentation fetched for this review.
+**Primary candidate:** `storytold/filmcraft` headless Rust NLE. Its architecture documents an engine-first session/command model, exact integer ticks and rational frame rates, a CPU-reference/GPU-fast-path renderer, project schema versioning, undo, scopes, codecs and multiple interchange formats. Its current repository README/docs are evidence of design, not proof that it compiles on our cloud target or fits our data model. `filmcraft-desktop/filmcraft` *(non-catalogue disambiguation target; `NOT VERIFIED`; not counted in the 412 occurrence rows or 264 unique catalogue identities)* has a similar architecture tree and should not be assumed identical to `storytold/filmcraft`; the latter has the more extensive architecture/testing/project-files/interchange documentation fetched for this review.
 
 **Gate before adoption:** pin commit; inspect full source and licence/configs; build server-side on intended Linux image; run `cargo xtask ci`; validate codecs; test headless project creation/import/trim/keyframe/mask/audio/mix/preview/render/cancel/undo/redo/persistence/reopen; benchmark 1080p and 4K; check RAM/GPU use; validate concurrent sessions; prove deterministic operation; create an adapter to AIVX canonical schema or formally select FilmCraft `.fcproj` as canonical. No decision to replace the app-wide schema with FilmCraft has been made.
 

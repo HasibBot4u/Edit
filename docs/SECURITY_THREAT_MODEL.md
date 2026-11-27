@@ -1,7 +1,7 @@
 # Security, Privacy and Abuse-Resistance Threat Model
 
-**Document ID:** AIVX-SEC-001 · **Version:** 1.0 · **Status:** PROPOSAL / REQUIRED BEFORE CLOUD RELEASE  
-**Related:** SEC-001..030, NFR-001..015, DATA-001..030, RISK-001..040
+**Document ID:** AIVX-SEC-001 · **Version:** 1.1 · **Date:** 2026-11-27 (Asia/Dhaka) · **Status:** PROPOSAL / REQUIRED BEFORE CLOUD RELEASE  
+**Related:** SEC-001..030, NFR-001..015, DATA-001..024, RISK-001..032
 
 ## 1. Assets to protect
 

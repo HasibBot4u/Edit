@@ -1,10 +1,10 @@
 # AIVX — Product Requirements and Software Requirements Specification
 
 **Document ID:** AIVX-PRD-001 / AIVX-SRS-001  
-**Version:** 1.0 · **Date:** 2026-11-26  
+**Version:** 1.1 · **Date:** 2026-11-27 (Asia/Dhaka)  
 **Status:** PRE-BUILD BASELINE — scope largely accepted; detailed prioritization remains OPEN  
 **Audience:** user, Android Build agent, backend architect, QA  
-**Related:** FEAT-01..15, FR-001..090, NFR-001..045, SCR-01..14, DATA-001..030, API-001..045, SEC-001..030, TEST-001..080
+**Related:** FEAT-01..15, FR-001..053 (41 defined; grouped with reserved gaps), NFR-001..015, SCR-01..14, DATA-001..024, API-001..045, SEC-001..030, TEST-001..088 (see `docs/TEST_REGISTER.md`), TEST-ARCH-001..007
 
 ## 1. Product vision
 
@@ -113,6 +113,8 @@ It is not a one-shot generator whose output cannot be changed. It is also not a 
 
 ## 6. Functional requirements (FR)
 
+> **ID numbering note (`FACT`):** Exactly **41** functional requirements are defined across 6 grouped ranges: `FR-001..006` (6), `FR-010..017` (8), `FR-020..029` (10), `FR-030..035` (6), `FR-040..046` (7), and `FR-050..053` (4). Unused slots (`FR-007..009`, `FR-018..019`, `FR-036..039`, `FR-047..049`) are **reserved for future expansion within each group**; existing IDs are never renumbered. Detailed feature-level FRs and boundary/failure acceptance criteria for `FEAT-04` (3D), `FEAT-05` (Graphics), `FEAT-06` (Masks/Tracking), `FEAT-07` (Audio mixing/DSP), `FEAT-08` (Typography animation/Bangla shaping), `FEAT-09` (Color/LUT), `FEAT-10` (VFX/OpenFX), and `FEAT-11` (Stabilization/Restoration) remain `OPEN`.
+
 ### Project and media
 - FR-001: User can create, rename, duplicate and delete private projects. Delete requires confirmation and retention policy execution.
 - FR-002: User can upload supported video/audio/image assets with resumable progress, cancellation and checksum verification.
@@ -194,4 +196,4 @@ This staging is a PROPOSAL; user requested high scope but approved implementatio
 
 ## 9. Acceptance and traceability
 
-Every FR must link to one FEAT, one or more SCR screens, DATA/API entities, SEC requirements and TEST cases. See `TRACEABILITY.md`. Every item remains `PLANNED` until implementation evidence is recorded. No repository README claim makes an FR PASS.
+Every FR must link to a FEAT (or `PLATFORM-CORE`), one or more SCR screens, DATA/API entities, SEC requirements and TEST cases. See `docs/TRACEABILITY.md` and `docs/TEST_REGISTER.md`. Every item remains `PLANNED` / `NOT TESTED` until implementation and verification evidence are recorded. No repository README claim makes an FR PASS.
